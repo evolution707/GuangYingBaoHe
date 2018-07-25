@@ -1,0 +1,419 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.js"></script>
+
+
+    <style>
+        /* logo和search*/
+        .header {
+            width: 960px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .header .logo {
+            width: 185px;
+            height: 100px;
+            display: inline-block;
+            float: left;
+        }
+        .header img {
+            width: 185px;
+        }
+        .search {
+            float: left;
+            width: 35%;
+            margin-top: 33px;
+            margin-left: 330px;
+        }
+
+        .container li {
+            width: 90px;
+        }
+        .container li a {
+            text-align: center;
+        }
+        .user-login {
+            float: right;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            margin-top: 34px;
+            margin-bottom: 20px;
+        }
+        a {
+            text-decoration: none;
+        }
+
+
+
+        .login-content {
+            width: 960px;
+            margin: 0 auto;
+        }
+
+        .login-main {
+            width: 720px;
+            height: 800px;
+            margin-top: 30px;
+        }
+        .login-head {
+            height: 60px;
+            width: 680px;
+            margin: 0 auto;
+        }
+        .a-line {
+            margin: 0 auto;
+            width: 680px;
+            border-bottom: 1px solid #ccc;
+            height: 30px;
+        }
+        .login-head h3 {
+            width: 100px;
+            margin: -12px auto;
+            padding: 0 25px;
+            overflow: hidden;
+            background-color: white;
+            color: #7d7d7d;
+        }
+
+
+
+
+        .register-form {
+            width: 400px;
+            height: 700px;
+            margin: 0 auto;
+{#            overflow:hidden;#}
+            position: relative;
+
+        }
+        .register-form a {
+            text-decoration: none;
+        }
+        .register-form input {
+            border: 1px solid #cecece;
+            border-radius: 4px;
+            outline: none;
+            text-indent: 10px;
+            height: 42px;
+
+        }
+         .register-form input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px #fffafb inset !important;
+    }
+        .register-form br {
+            line-height: 30px;
+        }
+        .register-form p {
+            display: inline-block;
+            height: 30px;
+            margin-left: 30px;
+            color: red;
+            line-height: 30px;
+            margin-bottom: 0;
+            width: 420px;
+        }
+
+
+        .register-email,.register-password,.register-username,.send-email {
+            width: 340px;
+            margin: 0 30px;
+            display: block;
+
+
+        }
+        .send-email {
+            height: 42px;
+        }
+        .register-code {
+            width: 186px;
+            display: inline-block;
+        }
+        .register-send {
+            display: inline-block;
+            width: 120px;
+            height: 42px;
+            border: 1px solid #cecece;
+            float: right;
+            line-height: 30px;
+            text-align: center;
+            background-color: #a0d3ff;
+            color: #448fd0
+        }
+        .register-send:hover {
+            color: #448fd0;
+        }
+
+        .register-btn {
+            width: 340px;
+            height: 40px;
+            background-color: #86c7ff;
+            color: white;
+            font-size: 20px;
+            outline: none !important;
+            margin: 0 30px;
+        }
+
+        .register-form span {
+            float: right;
+            margin: 15px 30px;
+            display: inline-block;
+        }
+
+        .sending {
+            color: #448fd0 !important;
+            cursor: not-allowed;
+            background-color: #cecec8 !important
+        }
+
+
+        #register-question {
+            position: relative;
+            left: -160px;
+            top: -114px;
+            font-size: 18px;
+            color: #a7a7a7;
+
+
+        }
+        .show-answer {
+            width: 230px;
+            height: 120px;
+            border: 1px solid #c5c1c5;
+            border-radius: 10px;
+            position: absolute;
+            left: -248px;
+            top: 228px;
+            color: #c5c1c5;
+            padding: 5px;
+            display: none;
+        }
+        /*a标签hover修改它的兄弟标签b的样式*/
+        #register-question:hover + .show-answer {
+            display: inline;
+        }
+        {% block css %}{% endblock %}
+    </style>
+</head>
+<body>
+    <div class="header" >
+        <div class="logo">
+            <a href="/">
+                <img src="{% static 'images/LightingBox.png' %}" alt="光影宝盒"/>
+            </a>
+        </div>
+
+
+        <div class="col-lg-6 search" >
+            <form class="input-group" action="{% url 'haystack_search' %}" method="get">
+                <input type="text" class="form-control" placeholder="站内搜索..." name="q">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">搜索</button>
+                </span>
+            </form><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+
+        <div class="user-login">
+            <span><a href="/login">登录 / 注册</a></span>
+        </div>
+    </div>
+
+    <div class="nav">
+        <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 10px;">
+            <div class="container">
+               <ul class="nav nav-tabs" style="width: 960px; margin: 0 auto">
+                  <li class="index active" role="presentation" ><a href="/">首页</a></li>
+                  <li class='mov' role="presentation"><a href="/mov/0-0-0/default">电影</a></li>
+                  <li class='tv' role="presentation"><a href="/tv/0/default">电视剧</a></li>
+                  <li class='cart' role="presentation"><a href="/cart">动漫</a></li>
+                  <li class='vari' role="presentation"><a href="/vari">综艺</a></li>
+                  <li class='vide' role="presentation"><a href="/vide">短片</a></li>
+                  <li class='revi' role="presentation"><a href="/revi">影评</a></li>
+                  <li class='mess' role="presentation"><a href="/mess">留言</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="login-content">
+        <div class="login-main">
+            <div class="login-head">
+                <div class="a-line"></div>
+                <h3>注册</h3>
+            </div>
+            <form action="register.html/" method="POST" class="register-form">
+                <input type="text" name="username" placeholder="请输入用户名" class="register-username"/>
+                <br>
+                <input type="text" name="email" placeholder="请输入邮箱地址" class="register-email"/>
+                <br>
+                <input type="password" name="password" placeholder="请输入密码" class="register-password"/>
+                <br>
+                <div class="send-email">
+                    <input type="text"  name="code" placeholder="请输入验证码" class="register-code"/>
+                    <a class="register-send btn" id='register-send' href="javascript:void(0);">获取验证码</a>
+                </div>
+                <br>
+                <button type="button" class="btn register-btn"><a href="/register">注册</a></button>
+                <span><a href="/login">已有账号，直接登录 ></a></span>
+
+
+                <span id='register-question' class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                <div class="show-answer">少し歩き疲れたんだ
+
+                                            少し歩き疲れたんだ
+
+                                            月並みな表現だけど
+
+                                            人生とかいう長い道を
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#register-question').hide();
+            $('.container >ul > li').each(function (index, item) {
+                var class_name = location.pathname.split('/')[1];
+                if (!class_name) {
+                    $('.index').addClass('active').siblings().removeClass('active');
+                }
+                if ($(this).hasClass(class_name)) {
+                    $(this).addClass("active").siblings().removeClass("active");
+                }
+            });
+
+            $(".register-username").blur(function () {
+                $.ajax({
+                    url: '/user_exists/',
+                    type: 'POST',
+                    data: $('.register-form').serialize(),
+                    success: function (data) {
+                        $('.error-msg').remove();
+                        var tag = document.createElement('p');
+                        tag.className = 'error-msg';
+                        tag.innerHTML = '该用户名已被注册';
+                        var obj = JSON.parse(data);
+                        if (!obj.status) {
+                            $("input[name='username']").after(tag);
+                        }
+                    }
+                })
+
+            });
+
+
+            $('.register-btn').click(function () {
+                $.ajax({
+                    url: 'register.html/',
+                    type: 'POST',
+                    data: $('.register-form').serialize(),
+                    success: function (data) {
+                        $('.error-msg').remove();
+                        // 将后台返回的字符串解析成JSON对象
+                        var obj = JSON.parse(data);
+                        if (!obj.status) {
+                            var error_obj = JSON.parse(obj.error);
+                            // 遍历error_obj中的对象，分别在其后面添加一个span标签，并将错误信息设置为其属性
+                            $.each(error_obj, function (k, v) {
+                                var tag = document.createElement('p');
+                                tag.className = 'error-msg';
+                                tag.innerHTML = v[0].message;
+                                if (k === 'code') {
+                                    $("input[name='" + k + "']").parent().after(tag);
+                                } else {
+                                    $("input[name='" + k + "']").after(tag);
+                                }
+                            })
+                        } else if(obj.status === 1){
+                            var tag = document.createElement('p');
+                                tag.className = 'error-msg';
+                                tag.innerHTML = '验证码已过期，请重新发送';
+                                $("input[name='code']").parent().after(tag);
+                        } else if(obj.status === 2){
+                            var tag = document.createElement('p');
+                                tag.className = 'error-msg';
+                                tag.innerHTML = '验证码输入有误';
+                                $("input[name='code']").parent().after(tag);
+                        }else {
+                            // 刷新当前页面
+                            alert('恭喜你注册成功，请点击登录！');
+                            location.href = "/login"
+                        }
+                    }
+                })
+            });
+
+            $(".register-send").click(function () {
+                $('.error-msg').remove();
+
+                var email = $('.register-email').val();
+
+                if ($(this).hasClass('sending')) {
+                    // 遇到return下面不再继续执行
+                    return;
+                }
+                var ths = $(this);
+                var time = 60;
+
+                $.ajax({
+                    url: "/send_msg/",
+                    type: 'POST',
+                    data: {'email': email},
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+
+                        if (!obj.status) {
+                            var error_obj = JSON.parse(obj.error);
+
+                            var tag = document.createElement('p');
+                            tag.className = 'error-msg';
+                            tag.innerHTML = error_obj['email'][0]['message'];
+                            console.log(tag.innerHTML);
+                            $("input[name='email']").after(tag);
+
+                        } else if(obj.status===1){
+                            var tag_1 = document.createElement('p');
+                            tag_1.className = 'error-msg';
+                            tag_1.innerHTML = '该邮箱已被注册';
+                            $("input[name='email']").after(tag_1);
+
+                        } else {
+                            $('#register-question').show();
+
+                            ths.addClass('sending');
+                            var interval = setInterval(function () {
+                                ths.text("(" + time + ")秒后可重发");
+                                time -= 1;
+                                if (time <= 0) {
+                                    clearInterval(interval);
+                                    ths.removeClass('sending');
+                                    ths.text("获取验证码");
+                                }
+                            }, 1000);
+                        }
+                    }
+                });
+
+            });
+
+
+        });
+    {% block js %}{% endblock %}
+
+    </script>
+
+</body>
+
+</html>

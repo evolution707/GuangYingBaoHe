@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+    .main-content {
+        width: 1000px;
+        margin: 0 auto;
+    }
+    .movie,.tele,.cart{
+        width: 740px;
+    }
+    .list-head {
+        height: 58px;
+        background-color: #f8f8f8;
+        margin-top: 10px;
+    }
+    .main-content h4 {
+        text-indent: 10px;
+    }
+    .icon {
+        margin-left: 15px;
+        line-height: 58px;
+    }
+    .cate {
+        display: inline-block;
+        font-size: 25px;
+    }
+    .more {
+        float: right;
+        line-height: 58px;
+        margin-right: 10px;
+    }
+    .main-content .list-head a {
+        color: #337ab7;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .content-list {
+        width: 740px;
+        background-color: #f8f8f8;
+        margin-top: 10px;
+        height: 450px;
+
+    }
+    .content-list .movie-ul {
+        width: 740px;
+        height: 450px;
+        padding-top: 10px;
+    }
+    .content-list .item {
+        width: 144px;
+        height: 220px;
+        display: inline-block;
+    }
+    .content-list a {
+        width: 140px;
+        height: 162px;
+        display: inline-block;
+        text-decoration: none;
+    }
+    .content-list img {
+        width: 118px;
+        margin-left: 16px;
+        height: 168px;
+    }
+    .content-list .title {
+        color: #333;
+        width: 115px;
+        height: 40px;
+        overflow: hidden;
+        margin: 12px 15px 0;
+    }
+    .t1,.t2 {
+        color: #5f5f5f;
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .t2 {
+        color: #ffac2d;
+        display: inline-block;
+        float: right;
+    }
+{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="movie">
+        <div class="list-head">
+            <span class="glyphicon glyphicon-film icon" aria-hidden="true"></span>
+            <span class="cate">电影</span>
+            <span class="more"><a href="/mov/0-0-0/default">更多 >></a></span>
+        </div>
+        <div class="content-list">
+            <ul class="movie-ul">
+                {% for row in movietv_list %}
+                    <li class="item">
+                        <a href={% url 'mov_detail' row.num %}>
+                            <img src="{{ STATIC_URL }}images/{{ row.pic_num }}" alt="movie" >
+                        </a>
+                        <p class="title">
+                            <span class="t1">{{ row.title }}</span>
+                            <span class="t2">{{ row.grade }}</span>
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="tele">
+        <div class="list-head">
+            <span class="glyphicon glyphicon-film icon" aria-hidden="true"></span>
+            <span class="cate">电视剧</span>
+            <span class="more"><a href="/tv/0/default">更多 >></a></span>
+        </div>
+        <div class="content-list">
+            <ul class="movie-ul">
+                {% for row in movietv_list %}
+                     <li class="item">
+                        <a href={% url 'tv_detail' row.num %}>
+                            <img src="{{ STATIC_URL }}images/{{ row.pic_num }}" alt="movie" >
+                        </a>
+                        <p class="title">
+                            <span class="t1">{{ row.title }}</span>
+                            <span class="t2">{{ row.grade }}</span>
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="cart">
+        <div class="list-head">
+            <span class="glyphicon glyphicon-film icon" aria-hidden="true"></span>
+            <span class="cate">动漫</span>
+            <span class="more"><a href="/cart/">更多 >></a></span>
+        </div>
+        <div class="content-list">
+            <ul class="movie-ul">
+                {% for row in movietv_list %}
+                     <li class="item">
+                        <a href={% url 'tv_detail' row.num %}>
+                            <img src="{{ STATIC_URL }}images/{{ row.pic_num }}" alt="movie" >
+                        </a>
+                        <p class="title">
+                            <span class="t1">{{ row.title }}</span>
+                            <span class="t2">{{ row.grade }}</span>
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

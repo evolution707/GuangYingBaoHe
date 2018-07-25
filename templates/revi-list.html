@@ -1,0 +1,276 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.js"></script>
+
+
+    <style>
+        body {
+
+        }
+        /* logo和search*/
+        .header {
+            width: 1000px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .header .logo {
+            width: 185px;
+            height: 100px;
+            display: inline-block;
+            float: left;
+        }
+        .header img {
+            width: 185px;
+        }
+        .search {
+            float: left;
+            width: 35%;
+            margin-top: 33px;
+            margin-left: 330px;
+        }
+        .container .nav-tabs {
+            width: 980px;
+        }
+        .container li {
+            width: 100px;
+        }
+        .container li a {
+            text-align: center;
+        }
+        .user-login {
+            float: right;
+            width: 100px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .user-login a {
+            text-decoration: none;
+        }
+        .user-login span {
+            font-size: 18px;
+            padding-right: 10px;
+            color: #b9b9b9;
+            position: relative;
+            top: 4px;
+        }
+          input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px #fffafb inset !important;
+    }
+
+
+
+
+          .revi-list-main {
+              width: 980px;
+              height: 800px;
+              margin: 0 auto;
+          }
+          .revi-list-content {
+              width:740px;
+              height: 800px;
+          }
+          .revi-list-content ul {
+                width: 740px;
+                height: 40px;
+                border-bottom: 1px solid #d9edf7;
+                margin: 30px auto 0;
+          }
+          .revi-list-content ul > li {
+              display: inline-block;
+                width: 100px;
+                text-align: center;
+                margin: 6px 20px;
+                padding-bottom: 10px;
+                padding-right: 10px;
+          }
+          .revi-list-content .glyphicon {
+              margin-right: 10px;
+              top: 2px;
+          }
+
+          .revi-list-content a {
+              text-decoration: none;
+
+          }
+        .revi-list-content ul>li>a {
+            color: #7d7d7d;
+        }
+        .revi-list-content ul > li.active {
+            border-bottom: 4px solid #8eb6fe;
+
+        }
+
+        .revi-list-content ul > li.active a {
+            color: #080808;
+        }
+
+
+
+
+
+
+
+
+        .revi-main {
+            width: 740px;
+            background-color: #f8f8f8;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+        }
+        .revi-main p {
+            text-indent: 5px;
+            margin-bottom: 14px;
+        }
+        .revi-html {
+            color: #7d7d7d;
+            width: 690px;
+            margin-bottom: 10px;
+
+        }
+        .revi-content {
+            border-bottom: 1px solid #e8e7e7;
+            margin-bottom: 30px;
+            margin-top: 30px;
+        }
+        .revi-content p>a>img {
+            width: 30px;
+          height: 30px;
+          display: inline-block;
+        }
+        .revi-t a {
+            color: #444444;
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 40px;
+        }
+
+
+          .revi-status {
+              color: #8e8e8e;
+    }
+          .revi-status a {
+              color: #8e8e8e;
+
+          }
+          .revi-status .glyphicon {
+              top: 3px;
+          }
+          .revi-status span:nth-last-child(1) {
+            margin-left: 75px;
+        }
+
+        {% block css %}{% endblock %}
+    </style>
+</head>
+<body>
+    <div class="header" >
+        <div class="logo">
+            <a href="/">
+                <img src="{% static 'images/LightingBox.png' %}" alt="光影宝盒"/>
+            </a>
+        </div>
+
+
+        <div class="col-lg-6 search" >
+            <form class="input-group" action="{% url 'haystack_search' %}" method="get">
+                <input type="text" class="form-control" placeholder="站内搜索..." name="q">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">搜索</button>
+                </span>
+            </form><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+
+        <div class="user-login">
+            <a href="/login"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>登录</a>
+        </div>
+    </div>
+
+    <div class="nav">
+        <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 10px;">
+            <div class="container">
+               <ul class="nav nav-tabs" style="width: 960px; margin: 0 auto">
+                  <li class="index" role="presentation" ><a href="/">首页</a></li>
+                  <li class='mov' role="presentation"><a href="/mov/0-0-0/default">电影</a></li>
+                  <li class='tv' role="presentation"><a href="/tv/0/default">电视剧</a></li>
+                  <li class='cart' role="presentation"><a href="/cart">动漫</a></li>
+                  <li class='vari' role="presentation"><a href="/vari">综艺</a></li>
+                  <li class='vide' role="presentation"><a href="/vide">短片</a></li>
+                  <li class='revi active' role="presentation"><a href="/revi">影评</a></li>
+                  <li class='mess' role="presentation"><a href="/mess">留言</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="revi-list-main">
+        <div class="revi-list-content">
+            <ul>
+                <li class="revi active"><a href="/revi"><span class="glyphicon glyphicon-send" aria-hidden="true"></span>最新影评</a></li>
+                <li class="hot"><a href="hot"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span>最热影评</a></li>
+                <li class="friend"><a href="friend"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>好友发表</a></li>
+            </ul>
+
+            <div class="revi-main">
+                {% for row in revi_list %}
+                    <div class="revi-content">
+                        <p>
+                            <a href="/member/{{ row.revi_user.user_num }}">
+                                <img src="/static/images/head.png">&nbsp;&nbsp;{{ row.revi_user.username }}
+                            </a>&nbsp;&nbsp;发表了关于&nbsp;&nbsp;
+                            {% if row.revi_movietv.f_to_category_id == 1 %}
+                            <a href={% url 'mov_detail' row.revi_movietv.num %}>{{ row.revi_movietv.title }}</a>&nbsp;&nbsp;的影评
+                            {% else %}
+                            <a href={% url 'tv_detail' row.revi_movietv.num %}>{{ row.revi_movietv.title }}</a>&nbsp;&nbsp;的影评
+                            {% endif %}
+                        </p>
+                        <p class="revi-t"><a href="/revi/{{ row.revi_num }}">{{ row.revi_title }}</a></p>
+                        <div class="revi-html">{{ row.revi_content | safe  | truncatechars:100 }}</div>
+                        <p class="revi-status">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><a href="javascript:void(0);">({{ row.revi_views | default:0 }})</a>
+                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><a href="javascript:void(0);">({{ row.revi_has_vote.count | default:0 }})</a>
+                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span><a href="javascript:void(0);">({{ row.revi_has_comment.count | default:0 }})</a>
+                            <span>{{ row.date_created | date:'Y-m-d H:i:s'  }}</span>
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+    <script>
+        $(document).ready(function(){
+            $('.container >ul > li').each(function(index, item){
+            var class_name = location.pathname.split('/')[1];
+            if(!class_name){
+                $('.index').addClass('active').siblings().removeClass('active');
+            }
+            if($(this).hasClass(class_name)){
+                $(this).addClass("active").siblings().removeClass("active");
+            }
+        });
+
+            $('.revi-list-content >ul > li').each(function(index, item){
+            var class_name = location.pathname.split('/')[2];
+            if($(this).hasClass(class_name)){
+                $(this).addClass("active").siblings().removeClass("active");
+            }
+        });
+        });
+    {% block js %}{% endblock %}
+
+    </script>
+
+</body>
+
+</html>

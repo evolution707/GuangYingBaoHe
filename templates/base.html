@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.js"></script>
+
+
+    <style>
+        body {
+
+        }
+        /* logo和search*/
+        .header {
+            width: 1000px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .header .logo {
+            width: 185px;
+            height: 100px;
+            display: inline-block;
+            float: left;
+        }
+        .header img {
+            width: 185px;
+        }
+        .search {
+            float: left;
+            width: 35%;
+            margin-top: 33px;
+            margin-left: 330px;
+        }
+        .container .nav-tabs {
+            width: 980px;
+        }
+        .container li {
+            width: 100px;
+        }
+        .container li a {
+            text-align: center;
+
+        }
+        .user-login {
+            float: right;
+            width: 100px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .user-login a {
+            text-decoration: none;
+        }
+        .user-login span {
+            font-size: 18px;
+            padding-right: 10px;
+            color: #b9b9b9;
+            position: relative;
+            top: 4px;
+        }
+          input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px #fffafb inset !important;
+    }
+        {% block css %}{% endblock %}
+    </style>
+</head>
+<body>
+    <div class="header" >
+        <div class="logo">
+            <a href="/">
+                <img src="{% static 'images/LightingBox.png' %}" alt="光影宝盒"/>
+            </a>
+        </div>
+
+
+        <div class="col-lg-6 search" >
+            <form class="input-group" action="{% url 'haystack_search' %}" method="get">
+                <input type="text" class="form-control" placeholder="站内搜索..." name="q">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">搜索</button>
+                </span>
+            </form><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+
+        <div class="user-login">
+            <a href="/login"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>登录</a>
+        </div>
+    </div>
+
+    <div class="nav">
+        <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 10px;">
+            <div class="container">
+               <ul class="nav nav-tabs" style="width: 960px; margin: 0 auto">
+                  <li class="index active" role="presentation" ><a href="/">首页</a></li>
+                  <li class='mov' role="presentation"><a href="/mov/0-0-0/default">电影</a></li>
+                  <li class='tv' role="presentation"><a href="/tv/0/default">电视剧</a></li>
+                  <li class='cart' role="presentation"><a href="/cart">动漫</a></li>
+                  <li class='vari' role="presentation"><a href="/vari">综艺</a></li>
+                  <li class='vide' role="presentation"><a href="/vide">短片</a></li>
+                  <li class='revi' role="presentation"><a href="/revi">影评</a></li>
+                  <li class='mess' role="presentation"><a href="/mess">留言</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    {% block content %}{% endblock %}
+    <script>
+        $(document).ready(function(){
+            $('.container >ul > li').each(function(index, item){
+            var class_name = location.pathname.split('/')[1];
+            if(!class_name){
+                $('.index').addClass('active').siblings().removeClass('active');
+            }
+            if($(this).hasClass(class_name)){
+                $(this).addClass("active").siblings().removeClass("active");
+            }
+        });
+        });
+    {% block js %}{% endblock %}
+
+    </script>
+
+</body>
+
+</html>

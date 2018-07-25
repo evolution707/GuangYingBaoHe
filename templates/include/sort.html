@@ -1,0 +1,51 @@
+<style>
+    /*排序*/
+    .mov-sort {
+        width: 720px;
+        height: 44px;
+        border-top: 1px solid #dadde0;
+        border-bottom: 1px solid #dadde0;
+ }
+    .mov-sort .nav>li>a {
+        padding:0 10px;
+        display: inline-block;
+        border-radius: 10px;
+        color: #a5bcd0;
+    }
+    .mov-sort .nav>li>a:hover {
+         color: #448fd0;
+     }
+    .mov-sort li {
+        width: 100px;
+        height: 25px;
+        float: left;
+        display: inline-block;
+        text-align: center;
+        line-height: 20px;
+        margin: 12px 5px;
+    }
+    .mov-sort > ul > li.active > a {
+        color: #448fd0;
+        background-color: #ddd;
+}
+</style>
+
+
+<div class="mov-sort">
+    <ul class="nav">
+        <li class="time active"><a href="{{ current_url }}/time"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> 时间排序</a></li>
+        <li class="hot"><a href="{{ current_url }}/hot"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> 热度排序</a></li>
+        <li class="grade"><a href="{{ current_url }}/grade"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> 评分排序</a></li>
+    </ul>
+</div>
+
+<script>
+        $(document).ready(function(){
+            $('.mov-sort >ul > li').each(function(index, item){
+            var class_name = location.pathname.split('/')[3];
+            if($(this).hasClass(class_name)){
+                $(this).addClass("active").siblings().removeClass("active");
+            }
+        });
+        });
+</script>

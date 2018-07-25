@@ -1,0 +1,303 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+{#    <script type="text/javascript" src={% static "js/wangEditor.min.js" %}></script>#}
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.js"></script>
+
+
+    <style>
+        body {
+{#            background: url("/static/images/bgi.png")#}
+
+        }
+        /* logo和search*/
+        .header {
+            width: 960px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .header .logo {
+            width: 185px;
+            height: 100px;
+            display: inline-block;
+            float: left;
+        }
+        .header img {
+            width: 185px;
+        }
+        .search {
+            float: left;
+            width: 35%;
+            margin-top: 33px;
+            margin-left: 330px;
+        }
+
+        .container li {
+            width: 90px;
+        }
+        .container li a {
+            text-align: center;
+        }
+        .user-login {
+            float: right;
+            width: 100px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .user-login a {
+            text-decoration: none;
+        }
+        .user-login span {
+            font-size: 18px;
+            padding-right: 10px;
+            color: #b9b9b9;
+        }
+          input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px #fffafb inset !important;
+    }
+
+
+
+          .review-main {
+              width: 760px;
+              height: 800px;
+              margin: 0 auto;
+
+          }
+
+        .with-movietv {
+            background-color: #f8f8f8;
+            position: relative;
+            margin: 10px auto;
+        }
+        .with-movietv img {
+            width: 64px;
+{#            height: 142px;#}
+            display: inline-block;
+            margin: 15px;
+        }
+        .with-movietv .result-into {
+            display: inline-block;
+            word-break:normal;
+            word-wrap:break-word;
+            width: 500px;
+            line-height: 30px;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            position: absolute;
+            top: 16px;
+        }
+        .result-into .result-grade {
+            color: #ffac2d;
+        }
+
+        .review-form {
+{#            padding: 20px 30px;#}
+        }
+
+        .review-title {
+            width: 300px;
+            height: 40px;
+            border-bottom: 1px solid #c5c1c5;
+            margin: 20px 0;
+            font-size: 20px;
+        }
+        .review-title:focus {
+            outline:none ;
+        }
+        #editor {
+        }
+        .w-e-toolbar {
+            font-size: 20px;
+
+        }
+        .w-e-menu-pane1 * {
+            padding: 4px;
+        }
+
+        .review-commit {
+            width: 100px;
+            height: 30px;
+            border: 1px solid #e4eee3;
+            border-radius: 5px;
+            color: #575357;
+            margin-top: 10px;
+            outline:none !important ;
+
+        }
+
+        .revi-hint {
+            width: 200px;
+            height: 60px;
+            background-color: #585858;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            border-radius: 13px;
+            color: white;
+            text-align: center;
+            line-height: 60px;
+            display: none;
+            font-size: 16px;
+
+        }
+        {% block css %}{% endblock %}
+    </style>
+</head>
+<body>
+    <div class="header" >
+        <div class="logo">
+            <a href="/">
+                <img src="{% static 'images/LightingBox.png' %}" alt="光影宝盒"/>
+            </a>
+        </div>
+
+
+        <div class="col-lg-6 search" >
+            <form class="input-group" action="{% url 'haystack_search' %}" method="get">
+                <input type="text" class="form-control" placeholder="站内搜索..." name="q">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">搜索</button>
+                </span>
+            </form><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+
+        <div class="user-login">
+            <a href="/login"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>登录</a>
+        </div>
+    </div>
+
+    <div class="nav">
+        <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 10px;">
+            <div class="container">
+               <ul class="nav nav-tabs" style="width: 960px; margin: 0 auto">
+                  <li class="index active" role="presentation" ><a href="/">首页</a></li>
+                  <li class='mov' role="presentation"><a href="/mov/0-0-0/default">电影</a></li>
+                  <li class='tv' role="presentation"><a href="/tv/0/default">电视剧</a></li>
+                  <li class='cart' role="presentation"><a href="/cart">动漫</a></li>
+                  <li class='vari' role="presentation"><a href="/vari">综艺</a></li>
+                  <li class='vide' role="presentation"><a href="/vide">短片</a></li>
+                  <li class='revi' role="presentation"><a href="/revi">影评</a></li>
+                  <li class='mess' role="presentation"><a href="/mess">留言</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="review-main">
+
+        <h3>影评：</h3>
+        <div class="with-movietv">
+
+        {% for row in items %}
+            <img src="{{ STATIC_URL }}images/{{ row.pic_num }}">
+            <p class="result-into">
+
+{#                        /*电影显示的字段*/#}
+            {% if row.release_date %}
+            <span><a id='movietv_url' href="/mov/{{ row.num }}">{{ row.title }}</a> | ({{ row.release_date }})</span> | <span class="result-grade" >评分：{{ row.grade }}</span>
+            <br>
+            <span>{{ row.area }} / {{ row.type }} / {{ row.other_name }} / {{ row.lenght }}</span>
+            <br>
+            <span>{{ row.director }} / {{ row.actor }}</span>
+            {% else %}
+{#                        /*电视剧显示的字段*/#}
+            <span><a id='movietv_url' href="/tv/{{ row.num }}">{{ row.title }}</a> | ({{ row.debut }})</span> | <span class="result-grade" >评分：{{ row.grade }}</span>
+            <br>
+            <span>{{ row.area }} / {{ row.type }} / {{ row.other_name }} / {{ row.min }}</span>
+            <br>
+            <span>{{ row.director }} / {{ row.actor }}</span>
+            {% endif %}
+            </p>
+        {% endfor %}
+        </div>
+        <form action="/new_review/" method="POST" class="review-form" id="form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" class="review-title" placeholder="标题...">
+            <div id="editor" ></div>
+            <input type="button" class='review-commit btn' value="发表" id="btn">
+        </form>
+    </div>
+
+    <div class="revi-hint"></div>
+
+
+
+
+    <script src={% static 'js/wangEditor.min.js' %}></script>
+<script language="JavaScript" type="application/javascript">
+        var E = window.wangEditor;
+        var editor = new E('#editor');
+         editor.customConfig.menus = [
+             'head',  // 标题
+            'bold',  // 粗体
+            'fontSize',  // 字号
+            'fontName',  // 字体
+            'italic',  // 斜体
+            'underline',  // 下划线
+            'strikeThrough',  // 删除线
+            'link',  // 插入链接
+            'justify',  // 对齐方式
+            'image' // 插入图片
+             ];
+
+         editor.customConfig.uploadImgServer = '/upload';
+         editor.customConfig.showLinkImg = false;
+        editor.create();
+$(document).ready(function() {
+    $("#btn").click(function () {
+        var revi_content = editor.txt.html();
+        var url = $("#movietv_url").attr("href");
+        var revi_title = $('.review-title').val();
+
+        $.ajax({
+            url: '/new_review/',
+            data: {'revi_title': revi_title, 'revi_content': revi_content, 'url': url},
+            type: 'POST',
+            success: function (data) {
+                var obj = JSON.parse(data);
+                if (obj.status === 1) {
+                    document.getElementsByTagName(".revi-hint");
+                    $('.revi-hint').text('~请输入标题！~');
+                    $('.revi-hint').fadeIn(1500);
+                    $('.revi-hint').fadeOut(1500);
+                }else if(obj.status === 2) {
+                    document.getElementsByTagName(".revi-hint");
+                    $('.revi-hint').text('~还没写正文呢！~');
+                    $('.revi-hint').fadeIn(1500);
+                    $('.revi-hint').fadeOut(1500);
+                }else {
+                    $('.revi-hint').text("~发表成功！~");
+                    $('.revi-hint').fadeIn(1000);
+                    $('.revi-hint').fadeOut(1500);
+                    setTimeout(function(){
+                        location.href = '/member/' + obj.user_num + '/review';
+							  },2500)
+                }
+
+
+
+            }
+        });
+    });
+
+
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,999 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.js"></script>
+
+
+    <style>
+        body {
+
+        }
+        /* logo和search*/
+        .header {
+            width: 1000px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .header .logo {
+            width: 185px;
+            height: 100px;
+            display: inline-block;
+            float: left;
+        }
+        .header img {
+            width: 185px;
+        }
+        .search {
+            float: left;
+            width: 35%;
+            margin-top: 33px;
+            margin-left: 330px;
+        }
+        .container .nav-tabs {
+            width: 980px;
+        }
+        .container li {
+            width: 100px;
+        }
+        .container li a {
+            text-align: center;
+
+        }
+        .user-login {
+            float: right;
+            width: 100px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .user-login a {
+            text-decoration: none;
+        }
+        .user-login span {
+            font-size: 18px;
+            padding-right: 10px;
+            color: #b9b9b9;
+            position: relative;
+            top: 4px;
+        }
+          input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px #fffafb inset !important;
+    }
+
+
+
+
+
+
+
+
+
+
+        .mov-content {
+        width: 960px;
+        height: auto;
+        margin:0 auto 300px;
+    }
+    .mov-header {
+        height: 65px;
+        width: 720px;
+        margin-bottom: 5px;
+        border-bottom: 1px solid #dad9d9;
+    }
+    .mov-header .mov-title {
+        width: auto;
+        height: 58px;
+        line-height: 65px;
+        text-indent: 10px;
+        display: inline-block;
+    }
+    .mov-title h3 {
+        display: inline-block;
+        text-align: center;
+    }
+    .mov-grade {
+        color: #ffac2d;
+        line-height: 65px;
+        display: inline-block;
+        float: right;
+        margin-right: 20px;
+        font-size: 17px;
+    }
+    .mov-body {
+        width: 720px;
+        position: relative;
+    }
+    .mov-body h4 {
+        border-left: 2px solid darkgray;
+        text-indent: 10px;
+        margin: 50px auto 20px;
+        font-size: 18px;
+
+    }
+
+    .mov-pic {
+        width: 185px;
+        margin-top: 10px;
+        margin-left: 15px;
+        display: inline-block;
+        height: 300px;
+        position: absolute;
+
+
+    }
+    .mov-pic img {
+        width: 185px;
+        height: 264px;
+    }
+    .mov-info {
+        width: 490px;
+        background-color: #f8f8f8;
+        padding: 5px 20px;
+        color: #909090;
+        display: inline-block;
+        position: relative;
+        float:right;
+        margin-right: 22px;
+        margin-top: 5px;
+    }
+    .mov-intro >h4 {
+        display: inline-block;
+    }
+
+    .mov-info span {
+        display: block;
+        margin: 7px auto;
+    }
+
+    .mov-intro {
+        width: 720px;
+        height: auto;
+        margin-top: 20px;
+    }
+
+
+    .user-handle {
+        display: inline-block;
+        float: right;
+        width: 220px;
+        height: 25px;
+        line-height: 25px;
+        padding: 0 30px;
+    }
+    .user-handle span {
+        padding-right: 5px;
+    }
+    .user-handle a {
+        padding-right: 15px;
+        text-decoration: none;
+    }
+
+
+
+
+
+
+
+
+
+    .mov-intro .intro-content {
+        line-height: 34px;
+        text-indent: 2em;
+        font-size: 1.1em;
+        color: #555;
+    }
+
+
+    .t-down {
+        height: auto;
+        width: 720px;
+        margin: 40px auto;
+    }
+    .t-down ul {
+        height: auto;
+        width: 720px;
+        margin-top: 10px;
+    }
+    .t-down li {
+        list-style-type: none;
+        display: inline-block;
+        border-bottom: 1px solid #dad9d9;
+        padding: 10px;
+    }
+    .t-down a {
+        display: inline-block;
+        width: 720px;
+        text-decoration: none;
+
+    }
+
+    
+    
+    /*评论*/
+           .mov-comment {
+                  width: 740px;
+    {#              position: relative;#}
+              }
+
+          .mov-comment img {
+                width: 40px;
+                height: 40px;
+                display: inline-block;
+                margin-right: 10px;
+                float: left;
+          }
+          .mov-comment-form {
+              width: 670px;
+              height: 110px;
+              display: table;
+          }
+
+          .mov-comment .comment-content {
+            width: 660px;
+            height: 90px;
+            border: 1px solid #d6d6d6;
+            display: inline-block;
+            float: right;
+            outline: none !important;
+            padding: 7px;
+
+
+          }
+          .comment-content a {
+              text-decoration: none;
+
+          }
+          .mov-comment-btn, .reply-btn {
+              float: right;
+              line-height: 1.3;
+              padding: 6px 24px;
+              border-radius: 4px;
+              outline: none !important;
+              background-color: #a0d3ff;
+              margin-top: 5px;
+          }
+
+
+
+          /*history*/
+        .comment-items {
+            width: 720px;
+            display: table;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .comment-img {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            margin-right: 10px;
+            float: left;
+            position: absolute;
+        }
+        .comment-img img {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+        }
+        .comment-main {
+            width: 660px;
+            float: right;
+            margin-left: 58px;
+
+        }
+        .comment-content {
+            border-bottom: 1px solid #c5c1c5;
+            border-radius: 5px;
+        }
+        .c-head a {
+            margin-right: 20px;
+            margin-left: 10px;
+        }
+        .c-head {
+            background-color: #f3f5f7;
+            line-height: 30px;
+        }
+        .c-head span {
+            color: #bbb7b7;
+        }
+        .c-head span:nth-child(3) {
+            margin-left: 385px;
+        }
+        .c-body {
+{#            padding: 5px;#}
+        }
+        .c-end {
+            line-height: 35px;
+            text-align: right;
+        }
+        .c-end span {
+            margin: 0 6px;
+        }
+
+
+        /*回复下拉框*/
+        .dropdown, .dropup {
+            position: relative;
+            left: 16px;
+        }
+
+        .dropdown-menu {
+            position: relative;
+            left: -28px;
+            border: transparent ;
+            -webkit-box-shadow: 0 0 0 rgba(0,0,0,.175);
+            box-shadow: 0 0 0 rgba(0,0,0,.175);
+        }
+          .mov-comment-form .reply-content {
+              width: 98%;
+              outline: none;
+              background-color: #f1f1f1;
+              border: 1px solid #d4d4d4;
+              border-radius: 6px;
+              padding-left: 10px;
+              margin-left: 13px;
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .comm-reply {
+            width: 658px;
+            display: table;
+            margin-top: 10px;
+        }
+        .reply-content {
+            width: 600px;
+            float: right;
+        }
+        .reply-content .c-head a:nth-child(1){
+            margin-right: 0;
+        }
+        .reply-content .c-head a:nth-child(3) {
+            margin-left: 0;
+
+        }
+
+        .to-user {
+            color: #4c4c4c !important;
+            padding: 0 5px;
+        }
+        .comm-hint {
+            width: 200px;
+            height: 60px;
+            background-color: #585858;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            border-radius: 13px;
+            color: white;
+            text-align: center;
+            line-height: 60px;
+            display: none;
+            font-size: 16px;
+            z-index: 10000;
+
+        }
+
+
+        .reply-form {
+              width: 610px;
+              height: 110px;
+              display: table;
+          }
+        .reply-form .reply-content {
+            width: 98%;
+            outline: none;
+            background-color: #f1f1f1;
+            border: 1px solid #d4d4d4;
+            border-radius: 6px;
+            padding-left: 10px;
+            margin-left: 13px;
+        }
+
+
+
+        .comment-del {
+            line-height: 30px;
+            text-align: center;
+            margin: 26px auto;
+          }
+
+        .modal-sm {
+            width: 480px;
+        }
+
+        /*评论计数*/
+        .c-count {
+            line-height: 40px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        {% block css %}{% endblock %}
+    </style>
+</head>
+<body>
+    <div class="header" >
+        <div class="logo">
+            <a href="/">
+                <img src="{% static 'images/LightingBox.png' %}" alt="光影宝盒"/>
+            </a>
+        </div>
+
+
+        <div class="col-lg-6 search" >
+            <form class="input-group" action="{% url 'haystack_search' %}" method="get">
+                <input type="text" class="form-control" placeholder="站内搜索..." name="q">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">搜索</button>
+                </span>
+            </form><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+
+        <div class="user-login">
+            <a href="/login"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>登录</a>
+        </div>
+    </div>
+
+    <div class="nav">
+        <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 10px;">
+            <div class="container">
+               <ul class="nav nav-tabs" style="width: 960px; margin: 0 auto">
+                  <li class="index active" role="presentation" ><a href="/">首页</a></li>
+                  <li class='mov' role="presentation"><a href="/mov/0-0-0/default">电影</a></li>
+                  <li class='tv' role="presentation"><a href="/tv/0/default">电视剧</a></li>
+                  <li class='cart' role="presentation"><a href="/cart">动漫</a></li>
+                  <li class='vari' role="presentation"><a href="/vari">综艺</a></li>
+                  <li class='vide' role="presentation"><a href="/vide">短片</a></li>
+                  <li class='revi' role="presentation"><a href="/revi">影评</a></li>
+                  <li class='mess' role="presentation"><a href="/mess">留言</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    
+    <div class="main-content">
+        <div class="mov-content">
+            <div class="mov-header">
+                <div class="mov-title">
+                    <h3>{{ items.title }}</h3>
+                </div>
+                <strong><span class="mov-grade">评分：{{ items.grade }}</span></strong>
+            </div>
+            <div class="mov-body">
+                <div class="mov-pic">
+                    <img src="{{ STATIC_URL }}images/{{ items.pic_num }}">
+                </div>
+                <div class="mov-info">
+                    {% if items.f_to_category_id == 1 %}
+                        <span>导演：{{ items.director }}</span>
+                        <span>编剧：{{ items.writer }}</span>
+                        <span>主演：{{ items.actor }}</span>
+                        <span>类型：{{ items.type }}</span>
+                        <span>制片国家/地区：{{ items.area }}</span>
+                        <span>语言：{{ items.language }}</span>
+                        <span>上映日期：{{ items.release_date }}</span>
+                        <span>片长：{{ items.lenght }}</span>
+                        <span>又名：{{ items.other_name }}</span>
+                    {% else %}
+                        <span>导演：{{ items.director }}</span>
+                        <span>编剧：{{ items.writer }}</span>
+                        <span>主演：{{ items.actor }}</span>
+                        <span>类型：{{ items.type }}</span>
+                        <span>制片国家/地区：{{ items.area }}</span>
+                        <span>语言：{{ items.language }}</span>
+                        <span>首播：{{ items.debut }}</span>
+                        <span>集数：{{ items.cd }}</span>
+                        <span>单集片长：{{ items.min }}</span>
+                        <span>又名：{{ items.other_name }}</span>
+                    {% endif %}
+                </div>
+                <div style="clear:both;"></div>
+                {% if query == True %}
+                <div class="mov-intro">
+                    <h4>剧情简介</h4>
+                        <div class="user-handle">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><a href="/new_review" target="_blank">写影评</a>
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><a class="add-collect" href="javascript:void(0);">已收藏</a>
+                        </div>
+                    <div class="intro-content">{{ items.intro }}</div>>
+                </div>
+                {% else  %}
+                <div class="mov-intro">
+                    <h4>剧情简介</h4>
+                    <div class="user-handle">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><a href="/new_review" target="_blank">写影评</a>
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><a class="add-collect" href="javascript:void(0);">收藏</a>
+                        </div>
+                    <div class="intro-content">{{ items.intro }}</div>>
+                </div>
+                {% endif %}
+                <div class="t-down">
+                    <h4>视频下载</h4>
+                <span class="glyphicon glyphicon-magnet" aria-hidden="true"></span>
+                    <ul>
+                   {% for k,v in torrent_items.items %}
+                        <li><a href="{{ v }}" >{{ k }}</a></li>
+                   {% endfor %}
+                    </ul>
+                </div>
+                <div class="mov-comment">
+                    <h4>评论</h4>
+                    <img src="/static/images/head.png">
+                    <form action="movietv-detail.html/" method="POST" class="mov-comment-form">
+                        <textarea class='comment-content' placeholder="添加评论..."></textarea>
+                        <input class='mov-comment-btn btn' type="button" id="comment-btn" value="提交">
+                    </form>
+                </div>
+                <p class="c-count"><span id='comment_count'>{{ comm_items | length |default:0 }}</span>条评论</p>
+            <!--for循环之外套一层div，用于追加新评论，否则在已有的评论后逐一追加-->
+                <div class="tt">
+                {% for row in comm_items %}
+                <div class="comment-items" id="{{ row.comm_num }}">
+                    <div class="comment-img">
+                        <a href="/member/{{ row.comm_user_num.user_num }}">
+                            <img src="/static/images/head2.png">
+                        </a>
+                    </div>
+                    <div class="comment-main">
+                        <div class="comment-content">
+                            <p class="c-head">
+                                <a id='comm-user-{{ row.comm_num }}' href="/member/{{ row.comm_user_num.user_num }}">{{ row.comm_user_num.username }}</a>
+                                <span>{{ row.ctime | date:'Y-m-d H:i:s' }}</span>
+                                <span>#&nbsp;{{ forloop.revcounter }}</span>
+                            </p>
+                            <p class="c-body" id="c-content">
+                                {{ row.m_content }}
+                            </p>
+                            <!--一级下拉框-->
+                            <div class="c-end">
+                                <div class="dropdown" style="display: inline-block">
+                                  <span class="dropdown-toggle reply-span" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <a href="javascript:void(0);"><span>回复</span></a>
+                                  </span>|
+                                  <span>
+                                    <a href="javascript:void(0);" onclick="delComment(event)"><span id='del-{{ row.comm_num }}'>删除</span></a>
+                                  </span>
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li>
+                                    <form action="/add_reply/" method="POST" class="mov-comment-form" id="reply-form-{{ row.comm_num }}">
+                                        <textarea class='reply-content' id="reply-content-{{ row.comm_num }}" placeholder="回复..."></textarea>
+                                        <input class='reply-btn btn' type="button" id="reply-btn-{{ row.comm_num }}" value="提交" onclick="reply(event)">
+                                    </form>
+                                    </li>
+                                  </ul>
+                                </div>
+                            </div>
+                        <!--评论的回复-->
+                        <!--二级评论追加的标签-->
+                            <div class='cc' id="cc-{{ row.comm_num }}">
+                            {% for line in reply_items %}
+                                {% if line.with_comment_num.comm_num == row.comm_num %}
+                                <div class='comm-reply' id="{{ line.reply_num }}">
+                                         <div class='comment-img'>
+                                            <a href='/member/{{ line.from_user_num.user_num }}'>
+                                                <img src='/static/images/head3.png'>
+                                            </a>
+                                        </div>
+                                        <div class='reply-content'>
+                                            <p class='c-head'>
+                                                <!--图标span标签缩进 会导致两边有极小的空隙-->
+                                                <a id='reply-user-{{ line.reply_num }}' href='/member/{{ line.from_user_num.user_num }}'>{{ line.from_user_num.username }}</a><span class='glyphicon glyphicon-transfer to-user' aria-hidden='true'></span><a href='/member/{{ line.to_user_num.user_num }}'>{{ line.to_user_num.username }}</a>
+                                                <span>{{ line.reply_time | date:'Y-m-d H:i:s' }}</span>
+                                            </p>
+                                            <p class='c-body'>
+                                                <span>{{ line.reply_content }}</span>
+                                            </p>
+                                            <!--二级下拉框-->
+                                            <div class="c-end">
+                                                <div class="dropdown" style="display: inline-block">
+                                                  <span class="dropdown-toggle reply-span" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                      <a href="javascript:void(0);">
+                                                        <span>回复</span>
+                                                      </a>
+                                                  </span>|
+                                                  <span>
+                                                    <a href="javascript:void(0);" onclick="delReply(event)"><span id='del-{{ line.reply_num }}'>删除</span></a>
+                                                  </span>
+                                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                    <li>
+                                                    <form action="/add_reply/" method="POST" class="reply-form" id="reply-form-{{ line.reply_num }}">
+                                                        <textarea class='reply-content' id="reply-content-{{ line.reply_num }}" placeholder="回复..."></textarea>
+                                                        <input class='reply-btn btn' type="button" id="reply-btn-{{ line.reply_num }}" value="提交" onclick="toReply(event)">
+                                                    </form>
+                                                    </li>
+                                                  </ul>
+                                                </div>
+                                            </div>
+                                            <!--二级回复下拉框-->
+                                        </div>
+                                    </div>
+                                {% else %}
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                {% empty %}
+                {% endfor %}
+                </div>
+        </div>
+        </div>
+    </div>
+    <!--错误信息展示-->
+    <div class="comm-hint"></div>
+    <!--删除确认,待实现-->
+{#    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">#}
+{#      <div class="modal-dialog modal-sm" role="document">#}
+{#        <div class="modal-content">#}
+{#            <p class="comment-del">确定要删除评论吗？</p>#}
+{#            <div class="modal-footer">#}
+{#                <button type="button" class="btn btn-default" data-dismiss="modal" >确认</button>#}
+{#                <button type="button" class="btn btn-primary">取消</button>#}
+{#              </div>#}
+{#            <div style="clear:both;"></div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+
+    {% block content %}{% endblock %}
+
+    <script>
+        $(document).ready(function() {
+            $('.container >ul > li').each(function (index, item) {
+                var class_name = location.pathname.split('/')[1];
+                if (!class_name) {
+                    $('.index').addClass('active').siblings().removeClass('active');
+                }
+                if ($(this).hasClass(class_name)) {
+                    $(this).addClass("active").siblings().removeClass("active");
+                }
+            });
+
+            $('.add-collect').click(function () {
+                if ($('.add-collect').text() === '收藏') {
+                    var collect_status = 1;
+                } else if ($('.add-collect').text() === '已收藏') {
+                    var collect_status = 0;
+
+                }
+                var num = window.location.href.split('/')[4];
+                $.ajax({
+                    url: '/collect/',
+                    data: {'collect_status': collect_status, 'num': num},
+                    type: 'POST',
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+
+                        var status_text = $('.add-collect').text();
+                        if (obj.login_status === 1) {
+                            if (status_text === '已收藏') {
+                                $('.add-collect').text('收藏');
+                                alert('取消收藏！');
+                            } else {
+                                $('.add-collect').text('已收藏');
+                                alert('收藏成功！');
+                            }
+                        }
+                        else {
+                            alert('请先登录！');
+                            location.href = "/login"
+                        }
+
+
+                    }
+
+
+                });
+            });
+
+            $('#comment-btn').click(function () {
+                var comment_content = $('.comment-content').val();
+
+                $.ajax({
+                    url: 'movietv_detail.html/',
+                    data: {'comment_content': comment_content},
+                    type: 'POST',
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        if (!obj.status) {
+                            document.getElementsByTagName(".comm-hint");
+                            $('.comm-hint').text('~评论内容不能为空！~');
+                            $('.comm-hint').fadeIn(1500);
+                            $('.comm-hint').fadeOut(1500);
+                        } else {
+
+                            $('.comment-content').val('');
+                            str = ([
+                                "<div class='comment-items' id=" + obj.comm_num + ">",
+                                    "<div class='comment-img'>",
+                                        " <a href='/member/" + obj.user_num + "'> ",
+                                            "<img src='/static/images/head2.png'>",
+                                        "</a> ",
+                                "</div>",
+                                " <div class='comment-main'>",
+                                    " <div class='comment-content'>",
+                                        " <p class='c-head'> ",
+                                            "<a id='comm-user-" + obj.comm_num + "' href='/member/" + obj.user_num + "'>" + obj.username + "</a>",
+                                            " <span>" + obj.ctime + "</span>",
+                                            "<span>#&nbsp;" + obj.comment_count + "</span>",
+                                        "</p>",
+                                        " <p class='c-body'>" + obj.content,
+                                        "</p> ",
+  <!--一级-->
+                                        "<div class='c-end'>",
+                                            "<div class='dropdown' style='display: inline-block'>",
+                                              "<span class='dropdown-toggle' id='dropdownMenu2' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>",
+                                                  "<a href='javascript:void(0);'><span>回复</span></a>",
+                                              "</span>|",
+                                              "<span>",
+                                                "<a href='javascript:void(0);' onclick='delComment(event)'><span id='del-" + obj.comm_num + "'>删除</span></a>",
+                                              "</span>",
+                                              "<ul class='dropdown-menu' aria-labelledby='dropdownMenu2'>",
+                                                "<li>",
+                                                "<form action='/add_reply/' method='POST' class='mov-comment-form' id='reply-form-" + obj.comm_num + "'>",
+                                                    "<textarea class='reply-content' id='reply-content-" + obj.comm_num + "' placeholder='回复...'></textarea>",
+                                                    "<input class='reply-btn btn' type='button' id='reply-btn-" + obj.comm_num + "' value='提交' onclick='reply(event)'>",
+                                                "</form>",
+                                                "</li>",
+                                              "</ul>",
+                                            "</div>",
+                                        "</div>",
+                                        "<div id='cc-" + obj.comm_num + "'></div>",
+                                    "</div>",
+                                "</div>",
+                                "</div>"
+                            ]).join('');
+                            $('.tt').prepend(str);
+                            // 评论计数
+                            $('#comment_count').text(obj.comment_count);
+                        }
+                    }
+                });
+            });
+          });
+
+        function reply(e) {
+                    // 解决FireFox报错
+                    e = e||window.event;
+                    /*动态获取每条评论的id*/
+                    var c_id = e.target.id;
+                    /*对应的comment_num*/
+                    var num = c_id.split('-')[2];
+                    var comment_num = num;
+                    /*回复给哪位评论者*/
+                    var to_user = $('#comm-user-' + num).attr('href');
+                    var to_user_num = to_user.split('/')[2];
+
+                    /*获取最新创建的comment标签下的reply_content*/
+                    var reply_content = $('#reply-content-' + num).val();
+                    $.ajax({
+                        url: '/add_reply/',
+                        type: 'POST',
+                        data: {
+                            'reply_content': reply_content,
+                            'to_user_num': to_user_num,
+                            'comment_num': comment_num
+                        },
+                        success: function (data) {
+                            var obj = JSON.parse(data);
+                            if (!obj.status) {
+                                document.getElementsByTagName(".comm-hint");
+                                $('.comm-hint').text('~回复内容不能为空！~');
+                                $('.comm-hint').fadeIn(1500);
+                                $('.comm-hint').fadeOut(1500);
+                            } else {
+                                /*提交回复之后清空输入框，收回下拉框*/
+                                $('.reply-content').val('');
+                                $('.dropdown').removeClass('open');
+                                str = ([
+                                    "<div class='comm-reply' id=" + obj.reply_num + ">",
+                                         "<div class='comment-img'>",
+                                            "<a href='/member/" + obj.from_user_num + "'>",
+                                                "<img src='/static/images/head3.png'>",
+                                            "</a>",
+                                        "</div>",
+                                        "<div class='reply-content'>",
+                                            "<p class='c-head'>",
+                                                "<a id='reply-user-" + obj.reply_num + "' href='/member/" + obj.from_user_num + "'>" + obj.from_user_name + "</a>",
+                                                "<span class='glyphicon glyphicon-transfer to-user' aria-hidden='true'></span>",
+                                                "<a href='/member/" + obj.to_user_num + "'>" + obj.to_user_name + "</a>",
+                                                "<span>" + obj.reply_time + "</span>",
+                                            "</p>",
+                                            "<p class='c-body'>",
+                                                "<span>" + obj.reply_content + "</span>",
+                                            "</p>",
+     <!--二级-->
+                                            "<div class='c-end'>",
+                                                "<div class='dropdown' style='display: inline-block'>",
+                                                  "<span class='dropdown-toggle' id='dropdownMenu2' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>",
+                                                      "<a href='javascript:void(0);'>",
+                                                        "<span>回复</span>",
+                                                      "</a>",
+                                                  "</span>|",
+                                                  "<span>",
+                                                    "<a href='javascript:void(0);' onclick='delReply(event)'><span id='del-" + obj.reply_num + "'>删除</span></a>",
+                                                  "</span>",
+                                                  "<ul class='dropdown-menu' aria-labelledby='dropdownMenu2'>",
+                                                    "<li>",
+                                                    "<form action='/add_reply/' method='POST' class='reply-form' id='reply-form-" + obj.reply_num + "'>",
+                                                        "<textarea class='reply-content' id='reply-content-" + obj.reply_num + "' placeholder='回复...'></textarea>",
+                                                        "<input class='reply-btn btn' type='button' id='reply-btn-" + obj.reply_num + "' value='提交' onclick='toReply(event)'>",
+                                                    "</form>",
+                                                    "</li>",
+                                                  "</ul>",
+                                                "</div>",
+                                            "</div>",
+                                        "</div>",
+                                    "</div>",
+                                    "</div>"
+                                    ]).join('');
+                                    /*追加回复的标签，并将数据渲染到页面*/
+                                    $('#cc-' + num).append(str);
+                                }
+                            }
+                        });
+                    }
+
+        function toReply(e) {
+            // 解决FireFox报错
+            e = e||window.event;
+            // 获取当前点击事件标签的id
+            var c_id = e.target.id;
+            // 父级标签id
+            var p_id = document.getElementById(c_id).parentNode.id;
+            var id = p_id.split('-')[2];
+            // 父级的父级
+            var pp_id = document.getElementById(id).parentNode.id;
+
+            // 该回复归属于哪一条评论，无论该回复是回复评论本身还是回复其他回复（需要找到评论的id，以下两个参数都将写入数据库）
+            var comment_num = pp_id.split('-')[1];
+            // 该回复回复于哪一条回复
+            var reply_num = id;
+
+            // 回复给谁 （可以说一级评论的发起者，也可以说二级回复发起者）
+            var to_user = $('#reply-user-' + id).attr('href');
+            var to_user_num = to_user.split('/')[2];
+            // 回复的内容
+            var reply_content = $('#reply-content-' + id).val();
+
+            $.ajax({
+                url: '/add_reply/',
+                type: "POST",
+                data: {
+                    'reply_content': reply_content,
+                    'reply_num': reply_num,
+                    'comment_num': comment_num,
+                    'to_user_num': to_user_num},
+                success:function (data) {
+                    var obj = JSON.parse(data);
+                    if (!obj.status) {
+                        document.getElementsByTagName(".comm-hint");
+                        $('.comm-hint').text('~回复内容不能为空！~');
+                        $('.comm-hint').fadeIn(1500);
+                        $('.comm-hint').fadeOut(1500);
+                    } else {
+                                /*提交回复之后清空输入框，收回下拉框*/
+                                $('.reply-content').val('');
+                                $('.dropdown').removeClass('open');
+                                str = ([
+                                    "<div class='comm-reply' id=" + obj.reply_num + ">",
+                                         "<div class='comment-img'>",
+                                            "<a href='/member/" + obj.from_user_num + "'>",
+                                                "<img src='/static/images/head3.png'>",
+                                            "</a>",
+                                        "</div>",
+                                        "<div class='reply-content'>",
+                                            "<p class='c-head'>",
+                                                "<a id='reply-user-" + obj.reply_num + "' href='/member/" + obj.from_user_num + "'>" + obj.from_user_name + "</a>",
+                                                "<span class='glyphicon glyphicon-transfer to-user' aria-hidden='true'></span>",
+                                                "<a href='/member/" + obj.to_user_num + "'>" + obj.to_user_name + "</a>",
+                                                "<span>" + obj.reply_time + "</span>",
+                                            "</p>",
+                                            "<p class='c-body'>",
+                                                "<span>" + obj.reply_content + "</span>",
+                                            "</p>",
+<!--三级-->
+                                           "<div class='c-end'>",
+                                                "<div class='dropdown' style='display: inline-block'>",
+                                                  "<span class='dropdown-toggle' id='dropdownMenu2' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>",
+                                                      "<a href='javascript:void(0);'>",
+                                                        "<span>回复</span>",
+                                                      "</a>",
+                                                  "</span>|",
+                                                  "<span>",
+                                                    "<a href='javascript:void(0);' onclick='delReply(event)'><span id='del-" + obj.reply_num + "'>删除</span></a>",
+                                                  "</span>",
+                                                  "<ul class='dropdown-menu' aria-labelledby='dropdownMenu2'>",
+                                                    "<li>",
+                                                    "<form action='/add_reply/' method='POST' class='reply-form' id='reply-form-" + obj.reply_num + "'>",
+                                                        "<textarea class='reply-content' id='reply-content-" + obj.reply_num + "' placeholder='回复...'></textarea>",
+                                                        "<input class='reply-btn btn' type='button' id='reply-btn-" + obj.reply_num + "' value='提交' onclick='toReply(event)'>",
+                                                    "</form>",
+                                                    "</li>",
+                                                  "</ul>",
+                                                "</div>",
+                                            "</div>",
+                                        "</div>",
+                                    "</div>",
+                                    "</div>"
+                                ]).join('');
+                                // 在一级评论的后面追加标签，而不是在回复的后面追加
+                                $('#' + pp_id).append(str);
+                    }
+                }
+            })
+        }
+
+        function delComment(e) {
+            e = e||window.event;
+            var c_id = e.target.id;
+            var id = c_id.split('-')[1];
+            var comment_num = id;
+            // 点击删除，触发模态对话框，将模态对话框的‘确认’按钮绑定事件
+
+            $.ajax ({
+                url: '/del_comment_reply/',
+                type: 'POST',
+                data: {'comment_num': comment_num},
+                success:function () {
+                    var comment_tag = document.getElementById(id);
+                    comment_tag.parentNode.removeChild(comment_tag);
+
+                    var count = $('#comment_count').text();
+                    count--;
+                    $('#comment_count').text(count);
+                }
+            })
+        }
+
+        function delReply(e) {
+            e = e||window.event;
+            var c_id = e.target.id;
+            var id = c_id.split('-')[1];
+            var reply_num = id;
+
+            $.ajax ({
+                url: '/del_comment_reply/',
+                type: 'POST',
+                data: {'reply_num': reply_num},
+                success:function () {
+                    var reply_tag = document.getElementById(id);
+                    reply_tag.parentNode.removeChild(reply_tag);
+                }
+            })
+
+        }
+    {% block js %}{% endblock %}
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,264 @@
+{% extends 'base.html' %}
+{% load static %}
+
+     {% block css %}
+
+
+    /*动画nav*/
+    .tv-nav {
+        width: 960px;
+        height: 58px;
+        margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 80px 0;
+    }
+
+    .mynav ul {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+     flex-wrap: wrap;
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .mynav li:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    .mynav a {
+      display: block;
+      font-size: 15px;
+      color: black;
+      text-decoration: none;
+      padding: 7px 15px;
+    }
+
+    .target {
+      position: absolute;
+      border-bottom: 4px solid transparent;
+      z-index: -1;
+      -webkit-transform: translateX(-60px);
+              transform: translateX(-60px);
+    }
+
+    .mynav a,
+    .target {
+      -webkit-transition: all .35s ease-in-out;
+      transition: all .35s ease-in-out;
+    }
+
+
+
+
+
+    .main-content .list-head a {
+    color: #337ab7;
+    cursor: pointer;
+    text-decoration: none;
+    }
+    .content-list {
+        width: 720px;
+        background-color: #f8f8f8;
+        margin-top: 10px;
+    }
+    .content-list .movie-ul {
+        width: 720px;
+        padding-top: 10px;
+    }
+    .content-list .item {
+        width: 140px;
+        height: 220px;
+        display: inline-block;
+    }
+    .content-list a {
+        width: 140px;
+        height: 162px;
+        display: inline-block;
+        text-decoration: none;
+    }
+    .content-list img {
+        width: 115px;
+        margin-left: 16px;
+        height: 165px;
+    }
+    .content-list .title {
+        color: #333;
+        width: 115px;
+        height: 40px;
+        overflow: hidden;
+        margin: 10px 15px 0;
+    }
+    .t1,.t2 {
+        color: #999;
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .t2 {
+        color: #ffac2d;
+        display: inline-block;
+        float: right;
+    }
+
+
+
+    .mov-content {
+        width: 980px;
+        height: 420px;
+        margin: 0 auto
+    }
+    .mov-search {
+        background-color: #f8f8f8;
+        width: 720px;
+        height: 280px;
+        margin-top: 25px;
+
+    }
+    .mov-type,.mov-area,.mov-time {
+        height: 80px;
+        width: auto;
+        border: 1px solid rgb(150, 205, 190);
+        border-radius: 5px;
+    }
+    .mov-search li {
+        display: inline-block;
+        width: auto;
+        height: 20px;
+        color: #337ab7;
+        margin-top: 10px;
+        font-size: 15px;
+    }
+    .mov-search span {
+        text-align: center;
+        line-height: 30px;
+        display: inline-block;
+        margin-left: 10px;
+    }
+    .mov-search a {
+        text-decoration: none;
+        display: inline-block;
+        width: auto;
+        height: 25px;
+        padding: 6px 10px;
+        line-height: 16px ;
+    }
+    .mov-search a.active {
+        background-color: #a0d3ff;
+    }
+
+
+
+
+
+     {% endblock %}
+
+
+{% block content %}
+    <div class="mov-content">
+        <div class="tv-nav">
+            <nav class="mynav">
+              <ul>
+                <li><a href="javascript:void(0);" onclick="window.location.href='/tv/0/default/'">全部</a></li>
+                <li><a href="javascript:void(0);" onclick="window.location.href='/tv/1/default/'">美剧</a></li>
+                <li><a href="javascript:void(0);" onclick="window.location.href='/tv/2/default/'">英剧</a></li>
+                <li><a href="javascript:void(0);" onclick="window.location.href='/tv/3/default/'">大陆剧</a></li>
+                <li><a href="javascript:void(0);" onclick="window.location.href='/tv/4/default/'">港台剧</a></li>
+                <li><a href="javascript:void(0);" onclick="window.location.href='/tv/5/default/'">日剧</a></li>
+                <li><a href="javascript:void(0);" onclick="window.location.href='/tv/6/default/'">韩剧</a></li>
+                <li><a href="javascript:void(0);" onclick="window.location.href='/tv/7/default/'">其他</a></li>
+              </ul>
+            </nav>
+            <span class="target"></span>
+        </div>
+        {% include 'include/sort.html' %}
+        <div class="content-list">
+            <ul class="movie-ul">
+                {% for row in items %}
+                    <li class="item">
+                        <a href="{% url 'tv_detail' row.num %}">
+                            <img src="{{ STATIC_URL }}images/{{ row.pic_num }}" alt="movie" >
+                        </a>
+                        <p class="title">
+                            <span class="t1">{{ row.title }}</span>
+                            <span class="t2">{{ row.grade }}</span>
+                        </p>
+                    </li>
+                {% endfor %}
+                {% include 'include/pagination.html' %}
+            </ul>
+        </div>
+        </div>
+
+
+
+{% endblock %}
+{% block js %}
+        $(function () {
+
+        var target = document.querySelector(".target");
+          var links = document.querySelectorAll(".mynav a");
+          var colors = ["deepskyblue", "orange", "firebrick", "gold", "magenta", "black", "darkblue"];
+
+          function mouseenterFunc() {
+            if (!this.parentNode.classList.contains("active")) {
+              for (var i = 0; i < links.length; i++) {
+                if (links[i].parentNode.classList.contains("active")) {
+                  links[i].parentNode.classList.remove("active");
+                }
+                links[i].style.opacity = "0.25";
+              }
+
+              this.parentNode.classList.add("active");
+              this.style.opacity = "1";
+
+              var width = this.getBoundingClientRect().width;
+              var height = this.getBoundingClientRect().height;
+              var left = this.getBoundingClientRect().left + window.pageXOffset;
+              var top = this.getBoundingClientRect().top + window.pageYOffset;
+              var color = colors[Math.floor(Math.random() * colors.length)];
+
+              target.style.width = width + "px";
+              target.style.height = height + "px";
+              target.style.left = left + "px";
+              target.style.top = top + "px";
+              target.style.borderColor = color;
+              target.style.transform = "none";
+            }
+          }
+
+          for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener("click", function (e) {
+              return e.preventDefault();
+            });
+            links[i].addEventListener("mouseenter", mouseenterFunc);
+          }
+
+          function resizeFunc() {
+            var active = document.querySelector(".mynav li.active");
+
+            if (active) {
+              var left = active.getBoundingClientRect().left + window.pageXOffset;
+              var top = active.getBoundingClientRect().top + window.pageYOffset;
+
+              target.style.left = left + "px";
+              target.style.top = top + "px";
+            }
+          }
+
+          window.addEventListener("resize", resizeFunc);
+
+
+     $('.mov-sort > ul > li > a').each(function(index, item){
+            var class_name = location.pathname.split('/')[4];
+                console.log(class_name);
+            if($(this).hasClass(class_name)){
+                $(this).addClass("active").siblings().removeClass("active");
+            }
+        });
+        });
+
+{% endblock %}

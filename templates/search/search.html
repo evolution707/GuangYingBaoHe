@@ -1,0 +1,339 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.js"></script>
+
+
+    <style>
+        body {
+
+        }
+        /* logo和search*/
+        .header {
+            width: 1000px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .header .logo {
+            width: 185px;
+            height: 100px;
+            display: inline-block;
+            float: left;
+        }
+        .header img {
+            width: 185px;
+        }
+        .search {
+            float: left;
+            width: 35%;
+            margin-top: 33px;
+            margin-left: 330px;
+        }
+        .container .nav-tabs {
+            width: 980px;
+        }
+        .container li {
+            width: 100px;
+        }
+        .container li a {
+            text-align: center;
+
+        }
+        .user-login {
+            float: right;
+            width: 100px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .user-login a {
+            text-decoration: none;
+        }
+        .user-login span {
+            font-size: 18px;
+            padding-right: 10px;
+            color: #b9b9b9;
+            position: relative;
+            top: 4px;
+        }
+          input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px #fffafb inset !important;
+    }
+
+
+
+
+
+
+
+
+
+	 .main-content {
+{#            width: 960px;#}
+            margin: 0 auto;
+            height: auto;
+                         position: relative;
+
+        }
+
+        /* search*/
+        .main-search {
+            height: 65px;
+            width: 400px;
+            margin: 30px auto;
+        }
+        a:focus {
+            outline:none !important;
+        }
+        .bootstrap-select .dropdown-toggle:focus{
+            outline:none !important;
+        }
+        .bootstrap-select > .btn {
+            width: 86px;
+            height: 40px;
+        }
+        .bootstrap-select.btn-group .dropdown-menu {
+            min-width: 85px;
+            text-align: center;
+        }
+        .btn-group>.btn:first-child {
+            margin-left: -86px;
+{#            position: absolute;#}
+{#                left: -86px;#}
+
+        }
+        .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+            width: 0;
+        }
+        .bootstrap-select.btn-group:not(.input-group-btn), .bootstrap-select.btn-group[class*="col-"] {
+            float: left;
+        }
+        .bootstrap-select .btn-group .btn .filter-option {
+            text-indent: 14px;
+        }
+        .dropdown-menu {
+            right: 8px;
+            padding: 5px 0;
+            margin: 0 -8px 0;
+            left: -76px;
+        }
+        .dropdown-menu>li>a {
+            display: block;
+            padding: 5px 20px;
+            clear: both;
+            font-weight: 400;
+            line-height: 1.42857143;
+            color: #333;
+            text-decoration: none;
+        }
+        .dropdown-menu a {
+            color: #333;
+
+        }
+
+
+
+
+
+
+
+
+
+        .search-ret {
+            width: 960px;
+            height: 300px;
+            margin: 0 auto;
+        }
+        .search-ret h4 {
+            text-indent: 10px;
+            border-left: 2px solid darkgray;
+            margin: 24px auto;
+            font-size: 18px;
+        }
+        .result-p {
+            line-height: 170px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .show-result {
+            width: 760px;
+            height: 180px;
+            background-color: #f8f8f8;
+            margin-bottom: 10px;
+             position: relative;
+
+        }
+        .show-result img {
+            width: 85px;
+            height: 122px;
+            display: inline-block;
+            margin: 15px;
+        }
+        .show-result .result-into {
+            display: inline-block;
+            width: 580px;
+            line-height: 30px;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            position:absolute;
+            top: 14px;
+
+        }
+        .result-into .result-grade {
+            color: #ffac2d;
+        }
+        .result-pagin {
+            width: 760px;
+            height: 100px;
+        }
+        .result-pagin p {
+            margin: 10px auto;
+            text-align: center;
+            line-height: 45px;
+        }
+        {% block css %}{% endblock %}
+    </style>
+</head>
+<body>
+    <div class="header" >
+        <div class="logo">
+            <a href="/">
+                <img src="{% static 'images/LightingBox.png' %}" alt="光影宝盒"/>
+            </a>
+        </div>
+
+
+        <div class="col-lg-6 search" >
+            <form class="input-group" action="{% url 'haystack_search' %}" method="get">
+                <input type="text" class="form-control" placeholder="站内搜索..." name="q">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">搜索</button>
+                </span>
+            </form><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+
+        <div class="user-login">
+            <a href="/login"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>登录</a>
+        </div>
+    </div>
+
+    <div class="nav">
+        <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 10px;">
+            <div class="container">
+               <ul class="nav nav-tabs" style="width: 960px; margin: 0 auto">
+                  <li class="index active" role="presentation" ><a href="/">首页</a></li>
+                  <li class='mov' role="presentation"><a href="/mov/0-0-0/default">电影</a></li>
+                  <li class='tv' role="presentation"><a href="/tv/0/default">电视剧</a></li>
+                  <li class='cart' role="presentation"><a href="/cart">动漫</a></li>
+                  <li class='vari' role="presentation"><a href="/vari">综艺</a></li>
+                  <li class='vide' role="presentation"><a href="/vide">短片</a></li>
+                  <li class='revi' role="presentation"><a href="/revi">影评</a></li>
+                  <li class='mess' role="presentation"><a href="/mess">留言</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+
+
+
+
+
+
+    <div class="main-content">
+        <div class="main-search" >
+            <select class="selectpicker" style="display: none">
+                <option>综合</option>
+                  <option>电影</option>
+                  <option>电视剧</option>
+                  <option>动漫</option>
+                  <option>综艺</option>
+                  <option>短片</option>
+                  <option>影评</option>
+            </select>
+            <form class="input-group" action="{% url 'haystack_search' %}" method="get">
+                <input type="text" class="form-control" style="height: 40px;" placeholder="站内搜索..." name="q">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" style="line-height: 1.88" type="submit">搜索</button>
+                </span>
+            </form>
+        </div>
+
+        <div class="search-ret">
+        {% if query %}
+            <h4>共找到{{ page.object_list | length }}条相关结果，搜索结果如下：</h4>
+
+            {% for result in page.object_list %}
+                <div class="show-result">
+
+                    <img src="{{ STATIC_URL }}images/{{ result.object.pic_num }}">
+                    <p class="result-into">
+    {#                        /*电影显示的字段*/#}
+                    {% if result.object.release_date %}
+                    <span><a href="/mov/{{ result.object.num }}">{{ result.object.title }}</a> | ({{ result.object.release_date }})</span> | <span class="result-grade" >评分：{{ result.object.grade }}</span>
+                    <br>
+                    <span>{{ result.object.area }} / {{ result.object.type }} / {{ result.object.other_name }} / {{ result.object.lenght }}</span>
+                    <br>
+                    <span>{{ result.object.director }} / {{ result.object.actor }}</span>
+                    {% else %}
+    {#                        /*电视剧显示的字段*/#}
+                    <span><a href="/tv/{{ result.object.num }}">{{ result.object.title }}</a> | ({{ result.object.debut }})</span> | <span class="result-grade" >评分：{{ result.object.grade }}</span>
+                    <br>
+                    <span>{{ result.object.area }} / {{ result.object.type }} / {{ result.object.other_name }} / {{ result.object.min }}</span>
+                    <br>
+                    <span>{{ result.object.director }} / {{ result.object.actor }}</span>
+                    {% endif %}
+                    </p>
+
+                </div>
+
+            {% empty %}
+                <p class="result-p">未找到与"{{ query }}"相关的记录！</p>
+            {% endfor %}
+
+
+            {% if page.has_previous or page.has_next %}
+                <div class="result-pagin">
+                    <p>
+                    {% if page.has_previous %}<span><a href="?q={{ query }}&page={{ page.previous_page_number }}">{% endif %}« 上一页{% if page.has_previous %}</a></span>{% endif %}
+                    |
+                    {% if page.has_next %}<span><a href="?q={{ query }}&page={{ page.next_page_number }}">{% endif %}下一页 »{% if page.has_next %}</a></span>{% endif %}
+                    </p>
+                </div>
+
+            {% endif %}
+        {% endif %}
+        </div>
+    </div>
+
+    {% block content %}{% endblock %}
+    <script>
+        $(document).ready(function(){
+            $('.container >ul > li').each(function(index, item){
+            var class_name = location.pathname.split('/')[1];
+            if(!class_name){
+                $('.index').addClass('active').siblings().removeClass('active');
+            }
+            if($(this).hasClass(class_name)){
+                $(this).addClass("active").siblings().removeClass("active");
+            }
+        });
+        });
+    {% block js %}{% endblock %}
+
+    </script>
+
+</body>
+
+</html>

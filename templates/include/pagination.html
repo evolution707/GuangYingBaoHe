@@ -1,0 +1,25 @@
+<style>
+             /*分页*/
+    .pagination {
+        width: 720px;
+        height: 30px;
+        margin: 40px auto;
+        text-align: center;
+    }
+    .pagination a {
+        display: inline-block;
+        height: 30px;
+        width: 40px;
+        line-height: 30px;
+        margin: auto 5px;
+        border-radius: 5px;
+    }
+
+    .pagination .active {
+        background-color: #a0d3ff;
+    }
+
+</style>
+<div class="pagination">
+    {{ page_list | safe }}
+</div>

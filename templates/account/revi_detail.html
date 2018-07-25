@@ -1,0 +1,447 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.js"></script>
+
+
+    <style>
+        body {
+
+        }
+        /* logo和search*/
+        .header {
+            width: 960px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .header .logo {
+            width: 185px;
+            height: 100px;
+            display: inline-block;
+            float: left;
+        }
+        .header img {
+            width: 185px;
+        }
+        .search {
+            float: left;
+            width: 35%;
+            margin-top: 33px;
+            margin-left: 330px;
+        }
+
+        .container li {
+            width: 90px;
+        }
+        .container li a {
+            text-align: center;
+        }
+        .user-login {
+            float: right;
+            width: 100px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .user-login a {
+            text-decoration: none;
+        }
+        .user-login span {
+            font-size: 18px;
+            padding-right: 10px;
+            color: #b9b9b9;
+            position: relative;
+            top: 4px;
+        }
+          input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px #fffafb inset !important;
+    }
+
+
+
+
+
+
+
+          .revi-main {
+              width: 1000px;
+              height: 800px;
+              margin: 20px auto;
+          }
+          .revi-main a {
+              text-decoration: none;
+          }
+          .revi-left {
+              width: 720px;
+              float: left;
+          }
+          .revi-right {
+              width: 235px;
+              height: 800px;
+              float: right;
+          }
+          .revi-left .p-title {
+              font-size: 25px;
+              text-indent: 20px;
+              margin: 20px auto;
+              height: 30px;
+              line-height: 30px;
+              font-weight: bold;
+          }
+          .revi-info {
+              width: 710px;
+              height: 30px;
+{#              border: 1px solid black;#}
+              margin: 10px;
+              line-height: 30px;
+              font-size: 14px;
+          }
+          .revi-head {
+              border-bottom: 1px solid #c7c8b8;
+
+          }
+          .revi-info .img-head {
+              width: 20px;
+              height: 20px;
+              display: inline-block;
+              margin-left: 20px;
+          }
+          .revi-info p {
+              display: inline-block;
+              margin: 0 5px;
+          }
+          .revi-info p:nth-child(3) {
+              color: #7d7d7d;
+          }
+          .revi-content {
+              width: 666px;
+{#              border: 1px solid fuchsia;#}
+              margin: 25px;
+              line-height: 26px;
+          }
+
+
+
+          .revi-handle {
+              width: 720px;
+              border-bottom: 1px solid #c7c8b8;
+              margin-top: 40px;
+              color: #7d7d7d;
+              line-height: 40px;
+              padding-left: 25px;
+          }
+          .revi-handle .glyphicon {
+              top: 2px;
+          }
+          .revi-handle a {
+              padding: 10px 6px;
+              color: #7d7d7d;
+              outline-style:none;
+          }
+          .revi-handle span:nth-child(7) {
+              margin-left: 415px;
+          }
+
+
+
+
+
+
+          .revi-vote {
+              text-align: center;
+              width: 720px;
+              margin: 60px auto;
+              font-size: 16px;
+          }
+          .revi-vote a {
+              border: 1px solid #c7c8b8;
+              padding-left: 18px;
+              padding-right: 18px;
+              padding-top: 6px;
+              margin: 0 20px;
+              border-radius: 6px;
+              font-size: 24px;
+
+          }
+          .vote-span {
+              line-height: 20px;
+              margin-top: 5px;
+          }
+
+
+
+
+
+
+
+            /*评论*/
+          .revi-comment {
+              width: 720px;
+              position: relative;
+          }
+          .revi-comment img {
+              width: 40px;
+              height: 40px;
+              display: inline-block;
+              margin-right: 10px;
+
+          }
+          .revi-comment-form {
+              width: 660px;
+              display: inline-block;
+              height: 110px;
+              position: absolute;
+          }
+          .revi-comment textarea {
+              width: 660px;
+              height: 80px;
+              border: 1px solid #c5c1c5;
+              display: inline-block;
+              float: right;
+              outline: none !important;
+
+          }
+          .revi-comment-btn {
+              float: right;
+              line-height: 1.3;
+              padding: 6px 24px;
+              border-radius: 4px;
+              outline: none !important;
+              background-color: #a0d3ff;
+              margin-top: 5px;
+          }
+
+          /*右侧 用户资料*/
+          .revi-movietv-title {
+              font-size: 16px;
+              font-weight: 200;
+              width: 233px;
+              margin-top: 45px;
+              margin-left: 44px;
+
+          }
+          .revi-right img {
+              width: 110px;
+              margin: 10px 44px;
+          }
+
+          .revi-movietv-info {
+                word-wrap: break-word;
+                word-break: break-all;
+                overflow: hidden;
+                margin-left: 44px;
+                line-height: 24px;
+                margin-top: 5px;
+          }
+          .revi-movietv-info span {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+          }
+
+
+
+          .revi-del {
+            line-height: 30px;
+            text-align: center;
+            margin: 26px auto;
+          }
+          .btn {
+              outline-style: none !important;
+
+          }
+
+          .modal-sm {
+            width: 400px;
+        }
+        {% block css %}{% endblock %}
+    </style>
+</head>
+<body>
+    <div class="header" >
+        <div class="logo">
+            <a href="/">
+                <img src="{% static 'images/LightingBox.png' %}" alt="光影宝盒"/>
+            </a>
+        </div>
+
+        <div class="col-lg-6 search" >
+            <form class="input-group" action="{% url 'haystack_search' %}" method="get">
+                <input type="text" class="form-control" placeholder="站内搜索..." name="q">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">搜索</button>
+                </span>
+            </form><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+
+        <div class="user-login">
+            <a href="/login"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>登录</a>
+        </div>
+    </div>
+
+    <div class="nav">
+        <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 10px;">
+            <div class="container">
+               <ul class="nav nav-tabs" style="width: 960px; margin: 0 auto">
+                  <li class="index" role="presentation" ><a href="/">首页</a></li>
+                  <li class='mov' role="presentation"><a href="/mov/0-0-0/default">电影</a></li>
+                  <li class='tv' role="presentation"><a href="/tv/0/default">电视剧</a></li>
+                  <li class='cart' role="presentation"><a href="/cart">动漫</a></li>
+                  <li class='vari' role="presentation"><a href="/vari">综艺</a></li>
+                  <li class='vide' role="presentation"><a href="/vide">短片</a></li>
+                  <li class='revi active' role="presentation"><a href="/revi">影评</a></li>
+                  <li class='mess' role="presentation"><a href="/mess">留言</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="revi-main">
+        <div class="revi-left">
+            <div class="revi-head">
+                <p class="p-title">{{ revi_obj.revi_title }}</p>
+            </div>
+            <div class="revi-info">
+                <a href="/member/{{ revi_obj.revi_user.user_num }}"><img src="/static/images/head.png" class="img-head">&nbsp;&nbsp;{{ revi_obj.revi_user.username }}</a>
+                {% if revi_obj.revi_movietv.f_to_category_id == 1 %}
+                <p>评论了&nbsp;&nbsp;<a href={% url 'mov_detail' revi_obj.revi_movietv.num %}>《{{ revi_obj.revi_movietv.title }}》</a></p>
+                {% else %}
+                <p>评论了&nbsp;&nbsp;<a href={% url 'tv_detail' revi_obj.revi_movietv.num %}>《{{ revi_obj.revi_movietv.title }}》</a></p>
+                {% endif %}
+                <p>{{ revi_obj.date_created }}</p>
+            </div>
+            <div class="revi-content">
+                {{ revi_obj.revi_content | safe}}
+            </div>
+            <p class="revi-handle">
+                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><a href="javascript:void(0);">({{ revi_obj.revi_views | default:0 }})</a>
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><a class="vote-handle" href="javascript:void(0);">({{ revi_obj.revi_has_vote.count | default:0 }})</a>
+                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span><a href="javascript:void(0);">({{ revi_obj.revi_has_comment.count | default:0 }})</a>
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span><a href="/revi_edit">编辑&nbsp;&nbsp;</a>|
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span><a href="javascript:void(0);" data-toggle="modal" data-target=".bs-example-modal-sm">删除</a>
+            </p>
+            <p class="revi-vote">
+                {% if query %}
+                <a href="javascript:void(0);"><span style="color: lightblue" id='vote-span' class="glyphicon glyphicon-thumbs-up vote-span" aria-hidden="true"></span></a>
+                {% else %}
+                <a href="javascript:void(0);"><span style="color: darkgray;" id='vote-span' class="glyphicon glyphicon-thumbs-up vote-span" aria-hidden="true"></span></a>
+                {% endif %}
+            </p>
+            <div class="revi-comment">
+                <img src="/static/images/head.png">
+                <form action="#" method="POST" class="revi-comment-form">
+                    <textarea placeholder="添加评论..."></textarea>
+                    <input class='revi-comment-btn btn' type="button" id="btn" value="提交">
+                </form>
+            </div>
+        </div>
+        <div class="revi-right">
+            {% if revi_obj.revi_movietv.f_to_category_id == 1 %}
+            <p class="revi-movietv-title"><a href={% url 'mov_detail' revi_obj.revi_movietv.num %}>《{{ revi_obj.revi_movietv.title }}》</a></p>
+            {% else %}
+            <p class="revi-movietv-title"><a href={% url 'tv_detail' revi_obj.revi_movietv.num %}>《{{ revi_obj.revi_movietv.title }}》</a></p>
+            {% endif %}
+            <img src="/static/images/{{ revi_obj.revi_movietv.pic_num }}">
+            <p class="revi-movietv-info">
+                <span>导演：{{ revi_obj.revi_movietv.director }}</span>
+                <span>主演：{{ revi_obj.revi_movietv.actor }}</span>
+                <span>类型：{{ revi_obj.revi_movietv.type }}</span>
+                <span>地区：{{ revi_obj.revi_movietv.area }}</span>
+                {% if revi_obj.revi_movietv.debut %}
+                    <span>首播：{{ revi_obj.revi_movietv.debut }}</span>
+                {% else %}
+                    <span>上映日期：{{ revi_obj.revi_movietv.release_date }}</span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <!--删除前确认-->
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <p class="revi-del">确定要删除影评 《{{ revi_obj.revi_title }}》吗？</p>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >取消</button>
+                <button type="button" class="btn btn-primary" id="revi-del">确认</button>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+      </div>
+    </div>
+
+    {% block content %}{% endblock %}
+    <script>
+        $(document).ready(function(){
+            $('.container >ul > li').each(function(index, item){
+            var class_name = location.pathname.split('/')[1];
+            if(!class_name){
+                $('.index').addClass('active').siblings().removeClass('active');
+            }
+            if($(this).hasClass(class_name)){
+                $(this).addClass("active").siblings().removeClass("active");
+            }
+        });
+
+            $('.vote-span').click(function () {
+
+                var num = $('.vote-handle').text();
+                var n = num.split('')[1];
+
+                 if(document.getElementById("vote-span").style.color == 'lightblue'){
+                     color_status = 0;
+                       n--;
+                    $('.vote-handle').text('(' + n + ')');
+                     document.getElementById("vote-span").style.color = 'darkgrey'
+                 }else{
+                     color_status = 1;
+                       n++;
+                    $('.vote-handle').text('(' + n + ')');
+                     document.getElementById("vote-span").style.color = 'lightblue'
+                 }
+
+                    var revi_num = window.location.href.split('/')[4];
+
+                    $.ajax({
+                        url: 'revi_detail.html/',
+                        type: 'POST',
+                        data: {'color_status': color_status, 'revi_num': revi_num},
+                        success: function (data) {
+                        var obj = JSON.parse(data);
+
+                        }
+                    })
+
+
+        });
+
+            var revi_num = window.location.href.split('/')[4];
+            $('#revi-del').click(function () {
+                $.ajax({
+                    url: '/revi_del/',
+                    type: 'POST',
+                    data: {'revi_num': revi_num},
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                location.href = '/member/' + obj.user_num + '/review';
+                    }
+                })
+
+            })
+        });
+    {% block js %}{% endblock %}
+
+    </script>
+
+</body>
+
+</html>

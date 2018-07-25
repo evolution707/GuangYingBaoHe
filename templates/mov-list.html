@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    .main-content .list-head a {
+        color: #337ab7;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .content-list {
+        width: 720px;
+        margin-top: 10px;
+    }
+    .content-list .movie-ul {
+        width: 720px;
+        background-color: #f8f8f8;
+        margin: 0 auto;
+        padding-top: 10px;
+    }
+    .content-list .item {
+        width: 140px;
+        height: 220px;
+        display: inline-block;
+    }
+    .content-list a {
+        width: 140px;
+        height: 162px;
+        display: inline-block;
+        text-decoration: none;
+    }
+    .content-list img {
+        width: 115px;
+        margin-left: 16px;
+        height: 165px;
+    }
+    .content-list .title {
+        color: #333;
+        width: 115px;
+        height: 40px;
+        overflow: hidden;
+        margin: 10px 15px 0;
+    }
+    .t1,.t2 {
+        color: #999;
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .t2 {
+        color: #ffac2d;
+        display: inline-block;
+        float: right;
+    }
+
+
+
+    .mov-content {
+        width: 980px;
+        margin: 0 auto
+    }
+    .mov-search {
+        background-color: #f8f8f8;
+        width: 720px;
+        height: 280px;
+        margin-top: 25px;
+
+    }
+    .mov-type,.mov-area,.mov-time {
+        height: 80px;
+        width: auto;
+        border: 1px solid rgb(150, 205, 190);
+        border-radius: 5px;
+    }
+    .mov-search li {
+        display: inline-block;
+        width: auto;
+        height: 20px;
+        color: #337ab7;
+        margin-top: 10px;
+        font-size: 15px;
+    }
+    .mov-search span {
+        text-align: center;
+        line-height: 30px;
+        display: inline-block;
+        margin-left: 10px;
+    }
+    .mov-search a {
+        text-decoration: none;
+        display: inline-block;
+        width: auto;
+        height: 25px;
+        padding: 6px 10px;
+        line-height: 16px ;
+        border-radius: 4px;
+    }
+    .mov-search a.active {
+        background-color: #a0d3ff;
+    }
+
+
+
+
+
+
+
+
+
+
+   .result-p {
+    width: auto;
+    height: 100px;
+    margin: 50px;
+    font-size: 18px;
+
+}
+
+{% endblock %}
+
+    {% block content %}
+
+    <div class="mov-content">
+        <h4>标签选择：</h4>
+        <div class="mov-search">
+            <ul class="mov-type">
+            <!--组合搜索代码待优化-->
+                <span>类型选择：</span>
+
+                {% if kwargs.m_to_type == 0 %}
+                    <li><a class='active' href="/mov/0-{{ kwargs.m_to_area }}-{{ kwargs.f_to_time_id }}/default">全部</a></li>
+                {% else %}
+                    <li><a href="/mov/0-{{ kwargs.m_to_area }}-{{ kwargs.f_to_time_id }}/default">全部</a></li>
+                {% endif %}
+
+                {% for row in type_list %}
+                    {% if row.id == kwargs.m_to_type %}
+                        <a class='active' href="/mov/{{ row.id }}-{{ kwargs.m_to_area }}-{{ kwargs.f_to_time_id }}/default">{{ row.type }}</a>
+                    {% else %}
+                        <a href="/mov/{{ row.id }}-{{ kwargs.m_to_area }}-{{ kwargs.f_to_time_id }}/default">{{ row.type }}</a>
+                    {% endif %}
+                {% endfor %}
+
+            </ul>
+            <ul class="mov-area">
+                <span>地区选择：</span>
+
+                {% if kwargs.m_to_area == 0 %}
+                    <li><a class='active' href="/mov/{{ kwargs.m_to_type }}-0-{{ kwargs.f_to_time_id }}/default">全部</a></li>
+                {% else %}
+                    <li><a href="/mov/{{ kwargs.m_to_type }}-0-{{ kwargs.f_to_time_id }}/default">全部</a></li>
+                {% endif %}
+
+
+                {% for row in area_list %}
+                    {% if row.id == kwargs.m_to_area %}
+                        <a class='active' href="/mov/{{ kwargs.m_to_type }}-{{ row.id }}-{{ kwargs.f_to_time_id }}/default">{{ row.area }}</a>
+                    {% else %}
+                        <a href="/mov/{{ kwargs.m_to_type }}-{{ row.id }}-{{ kwargs.f_to_time_id }}/default">{{ row.area }}</a>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul class="mov-time">
+                <span>年代选择：</span>
+
+                {% if kwargs.f_to_time_id == 0 %}
+                    <li><a class='active' href="/mov/{{ kwargs.m_to_type }}-{{ kwargs.m_to_area }}-0/default">全部</a></li>
+                {% else %}
+                    <li><a href="/mov/{{ kwargs.m_to_type }}-{{ kwargs.m_to_area }}-0/default">全部</a></li>
+                {% endif %}
+
+                {% for row in time_list %}
+                    {% if row.id == kwargs.f_to_time_id %}
+                        <a class='active' href="/mov/{{ kwargs.m_to_type }}-{{ kwargs.m_to_area }}-{{ row.id }}/default">{{ row.time }}</a>
+                    {% else %}
+                        <a href="/mov/{{ kwargs.m_to_type }}-{{ kwargs.m_to_area }}-{{ row.id }}/default">{{ row.time }}</a>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% include 'include/sort.html' %}
+            <div class="content-list">
+                <ul class="movie-ul">
+                    {% for row in items %}
+                        <li class="item">
+                            <a href={% url 'mov_detail' row.num %}>
+                                <img src="{{ STATIC_URL }}images/{{ row.pic_num }}" alt="movie" >
+                            </a>
+                            <p class="title">
+                                <span class="t1">{{ row.title }}</span>
+                                <span class="t2">{{ row.grade }}</span>
+                            </p>
+                        </li>
+
+                          {% empty %}
+                    <div class="result-p">
+                        <p>未匹配到相关条目！</p>
+                    </div>
+
+                    {% endfor %}
+                </ul>
+
+
+                {% include 'include/pagination.html' %}
+            </div>
+
+
+        </div>
+
+
+    {% endblock %}
+
+
+{% block js %}
+    $(document).ready(function(){
+            $('nav nav-pills').each(function(index, item){
+            var class_name = location.pathname.split('/')[4];
+                    console.log(class_name);
+
+            if(!class_name){
+                $('.index').addClass('active').siblings().removeClass('active');
+            }
+            if($(this).hasClass(class_name)){
+                $(this).addClass("active").siblings().removeClass("active");
+            }
+        });
+        });
+{% endblock %}
